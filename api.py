@@ -1,6 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-import depthFirstSearchAlgo
+from depthFirstSearchAlgo import depthFirstSearchAlgo
+from breadthFirstSearch import get_path
+from getEgyptCities import getEgyptCities
 
 app = Flask(__name__)
 CORS(app)
@@ -18,10 +20,26 @@ def testJsonify():
     return jsonify({
         "message": "test jsonify and conncet with frontend"
     })
-@app.route('/depthFirstSearch')
+@app.route('/depthFirstSearch', methods=["POST"])
 def depthFirstSearch():
-    cities = depthFirstSearchAlgo.depthFirstSearchAlgo()
-    print(len(cities))
+    request_data = request.get_json()
+    cities = depthFirstSearchAlgo(request_data['startCity'], request_data['endCity'])
     return jsonify({"data": cities})
+
+@app.route('/breadthFirstSearch', methods=["POST"])
+def breadthFirstSearch():
+    request_data = request.get_json()
+    cities = get_path(request_data['startCity'], request_data['endCity'])
+    return jsonify({
+        "data": cities
+    })
+
+
+@app.route('/cities')
+def getCities():
+    cities = getEgyptCities()
+    return jsonify({"data": cities})
+
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5001, debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True)
