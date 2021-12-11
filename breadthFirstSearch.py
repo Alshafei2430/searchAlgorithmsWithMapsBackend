@@ -24,7 +24,7 @@ def BFS(initial_state, goal_state):
 
     # with open("adjacent.txt") as json_file:
     #     tree = json.load(json_file)
-    from ai import tree
+    from treeSorted import tree
     visited = make_visited_false(tree)
     visited[initial_state] = True
     queue.append(initial_state)

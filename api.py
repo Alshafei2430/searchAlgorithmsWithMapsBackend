@@ -3,7 +3,8 @@ from flask_cors import CORS
 from depthFirstSearchAlgo import depthFirstSearchAlgo
 from breadthFirstSearch import get_path
 from getEgyptCities import getEgyptCities
-
+from depthFirstAtlam import get_DFSpath
+from AStar import aStar
 app = Flask(__name__)
 CORS(app)
 
@@ -23,7 +24,7 @@ def testJsonify():
 @app.route('/depthFirstSearch', methods=["POST"])
 def depthFirstSearch():
     request_data = request.get_json()
-    cities = depthFirstSearchAlgo(request_data['startCity'], request_data['endCity'])
+    cities = get_DFSpath(request_data['startCity'], request_data['endCity'])
     return jsonify({"data": cities})
 
 @app.route('/breadthFirstSearch', methods=["POST"])
@@ -33,7 +34,11 @@ def breadthFirstSearch():
     return jsonify({
         "data": cities
     })
-
+@app.route('/aStar', methods=['POST'])
+def aStarSearch():
+    request_data = request.get_json()
+    cities = aStar(request_data['startCity'], request_data['endCity'])
+    return jsonify({"data": cities})
 
 @app.route('/cities')
 def getCities():

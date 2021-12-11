@@ -11,7 +11,7 @@ def getCityNeighbours(city , zoneRedius, multiplier = 1):
         for row in csv_reader:
             if row["from"].lower() == city.lower():
                 AllCityNeighbours.append(row)
-        while (len(NeighbourCitiesWithenZone) <= 3):
+        while (len(NeighbourCitiesWithenZone) <= 5):
             for city in AllCityNeighbours:
 
                 if(float(city["distance"]) <= zoneRedius * multiplier and (city not in NeighbourCitiesWithenZone) and float(city["distance"]) != 0):

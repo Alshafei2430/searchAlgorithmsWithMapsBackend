@@ -18,4 +18,4 @@ def createTree():
         json.dump(tree, outfile)
 
 if __name__ == '__main__':
-    pass
+    createTree()
