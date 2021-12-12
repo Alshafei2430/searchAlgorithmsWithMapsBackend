@@ -1,5 +1,3 @@
-from collections import deque
-
 from getCityNeighboursLatLng import getPathCitiesLatLng
 
 #---------------------------------------------------------------------
@@ -107,9 +105,3 @@ def aStar(start, end):
     path = graph1.a_star_algorithm(first, last)
     return getPathCitiesLatLng(path)
 
-#---------------------------------------------------------------------
-#---------------------------------------------------------------------
-#---------------------------------------------------------------------
-
-path = aStar('Tanta', 'Al Mansurah')
-print(path)

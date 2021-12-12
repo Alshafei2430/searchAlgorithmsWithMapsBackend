@@ -1,9 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from depthFirstSearchAlgo import depthFirstSearchAlgo
 from breadthFirstSearch import get_path
+from depthFirstSearch import get_DFSpath
 from getEgyptCities import getEgyptCities
-from depthFirstAtlam import get_DFSpath
 from AStar import aStar
 app = Flask(__name__)
 CORS(app)
@@ -12,15 +11,6 @@ CORS(app)
 def welcome():
     return 'Welcome to the Algorithms Api'
 
-@app.route('/test')
-def testMasterPush():
-    return 'this is a push from the master pranch'
-
-@app.route('/testJSONIFY')
-def testJsonify():
-    return jsonify({
-        "message": "test jsonify and conncet with frontend"
-    })
 @app.route('/depthFirstSearch', methods=["POST"])
 def depthFirstSearch():
     request_data = request.get_json()
@@ -34,6 +24,7 @@ def breadthFirstSearch():
     return jsonify({
         "data": cities
     })
+    
 @app.route('/aStar', methods=['POST'])
 def aStarSearch():
     request_data = request.get_json()
